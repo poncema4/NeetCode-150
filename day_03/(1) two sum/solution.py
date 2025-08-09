@@ -13,3 +13,5 @@ class Solution(object):
                 return [count[diff], i]
 
             count[n] = i
+
+# Difficulty: Easy

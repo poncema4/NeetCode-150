@@ -18,3 +18,5 @@ class Solution(object):
             post *= nums[i]
 
         return res
+    
+# Difficulty: Medium
