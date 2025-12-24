@@ -8,22 +8,22 @@ class TreeNode(object):
         self.right = right
 
 class Solution(object):
-    def goodNodes(self, root):
+    def isValidBST(self, root):
         """
-        :type root: TreeNode
-        :rtype: int
+        :type root: Optional[TreeNode]
+        :rtype: bool
         """
-        def dfs(node, maxVal):
+        def valid(node, left, right):
             if not node:
-                return 0
+                return True
 
-            res = 1 if node.val >= maxVal else 0
-            maxVal = max(maxVal, node.val)
-            res += dfs(node.left, maxVal)
-            res += dfs(node.right, maxVal)
-            return res
+            if not (node.val < right and node.val > left):
+                return False
 
-        return dfs(root, root.val)
+            return (valid(node.left, left, node.val) and
+                    valid(node.right, node.val, right))
+
+        return valid(root, float("-inf"), float("inf"))
     
 def buildTree(nodes):
     if not nodes:
@@ -45,4 +45,6 @@ def buildTree(nodes):
 
 c = Solution()
 tree = buildTree([3,1,4,3,None,1,5])
-print(c.goodNodes(tree))
+print(c.isValidBST(tree))
+tree2 = buildTree([2,1,3])
+print(c.isValidBST(tree2))
